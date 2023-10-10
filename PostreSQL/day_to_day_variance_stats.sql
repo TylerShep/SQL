@@ -1,0 +1,6 @@
+-- =============================================
+-- Author:      Tyler Shepherd
+-- Create date: 2023-10-10
+-- Description: Query finds the variance between stats column from two days ago and yesterday
+-- * Table names, column names, etc. has been aliased to protect DB Schema
+-- =============================================
