@@ -1,5 +1,11 @@
---Utilizing MSSQL's dynamic sql function PIVOT to reformat the CCT table for better performance
---Creates temp table where each CommunityID has its own row with BIT-type NameType columns
+-- =============================================
+-- AUTHOR: Tyler Shepherd 
+-- CREATED: 2024-02-21
+-- DESCRIPTION: 
+-- Utilizing MSSQL's dynamic sql function PIVOT to reformat the CCT table for better performance
+-- Creates temp table where each CommunityID has its own row with BIT-type NameType columns
+-- =============================================
+
 
 WITH CommmunityTypePiv as
          (SELECT *
