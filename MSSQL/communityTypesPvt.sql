@@ -7,27 +7,27 @@
 -- =============================================
 
 
-WITH CommmunityTypePiv as
+WITH SrcPiv as
          (SELECT *
-          FROM (SELECT cct.CommunityID, ct.Name, cct.CommunityTypeID
-                FROM CommunityCommunityType cct WITH (NOLOCK)
-                         JOIN CommunityType ct WITH (NOLOCK) ON cct.CommunityTypeID = ct.ID) as Src
+          FROM (SELECT cct.ID, ct.Name, cct.TypeID
+                FROM TableTableType cct WITH (NOLOCK)
+                         JOIN TableType ct WITH (NOLOCK) ON cct.ID = ct.ID) AS Src
                    PIVOT (
-                   COUNT(Src.CommunityTypeID)
-                   FOR Src.Name IN ([NameType1],[NameType2],[NameType3],[NameType4],[NameType5])) as PivotSource)
+                   COUNT(Src.TypeID)
+                   FOR Src.Name IN ([NameType1],[NameType2],[NameType3],[NameType4],[NameType5])) AS PivotSource)
 
-SELECT ctp.CommunityID,
+SELECT ctp.ID,
        ctp.NameType1 AS "IsType1",
        ctp.NameType2 AS "IsType2",
        ctp.NameType3 AS "IsType3",
        ctp.NameType4 AS "IsType4",
        ctp.NameType5 AS "IsType5",
-       SUM(CASE WHEN RCD.ResManInterfaceID = 2 THEN 1 ELSE 0 END) AS "IsType6"
+       SUM(CASE WHEN RCD.ID = 2 THEN 1 ELSE 0 END) AS "IsType6"
 
-FROM CommmunityTypePiv as ctp
-         JOIN Community c WITH (NOLOCK) on c.ID = ctp.CommunityID
-         LEFT JOIN ResManConnectionData RCD WITH (NOLOCK)
-                   ON RCD.PMSystemConnectionDataID = c.PropertyManagementRetrieverDataID
+FROM Table1 AS ctp
+         JOIN SrcPiv c WITH (NOLOCK) ON c.ID = ctp.ID
+         LEFT JOIN Table3 RCD WITH (NOLOCK)
+                   ON RCD.ID = c.ID
 
 GROUP BY ctp.CommunityID, ctp.NameType1, ctp.NameType2, ctp.NameType3, ctp.NameType4,
          ctp.NameType5
